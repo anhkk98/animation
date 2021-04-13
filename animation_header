@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'bg.dart';
 
 class AnimationHeader extends StatelessWidget {
@@ -9,12 +8,10 @@ class AnimationHeader extends StatelessWidget {
       backgroundColor: Color(0xFFECECEA),
       body: SafeArea(
         child: CustomScrollView(
-
           slivers: <Widget>[
             SliverPersistentHeader(
               delegate: _MyHeader(),
               pinned: true,
-
             ),
             SliverToBoxAdapter(
               child: Container(
@@ -55,11 +52,9 @@ const _maxPosText = 86.0;
 const _minPosText = 5.0;
 
 class _MyHeader extends SliverPersistentHeaderDelegate {
-
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-
     /// thu nhỏ header percent = 1.0, phóng to header perent = 0.0
     double percent = shrinkOffset / _maxHeightHeader;
     print(percent);
@@ -68,17 +63,16 @@ class _MyHeader extends SliverPersistentHeaderDelegate {
     final currentSizeHeight = (_maxHeightButton * (1 - percent))
         .clamp(_minHeightButton, _maxHeightButton);
 
-
     /// tính position của button từ trái qua phải
     final currentPos = _posButton / (percent + 0.033);
 
     /// tính position của text từ max về min
-    final currentPosText = (_maxPosText * (1 - percent))
-        .clamp(_minPosText, _maxPosText);
+    final currentPosText =
+        (_maxPosText * (1 - percent)).clamp(_minPosText, _maxPosText);
 
     ///
-    final currentIcon = (_maxSizeIcon * (1 - percent))
-        .clamp(_minSizeIcon, _maxSizeIcon);
+    final currentIcon =
+        (_maxSizeIcon * (1 - percent)).clamp(_minSizeIcon, _maxSizeIcon);
     return Container(
       alignment: Alignment.center,
       color: Colors.black,
@@ -88,8 +82,11 @@ class _MyHeader extends SliverPersistentHeaderDelegate {
           Positioned(
               bottom: 10,
               right: 30,
-              child: Icon(Icons.favorite,color: Colors.red,size: currentIcon,)
-          ),
+              child: Icon(
+                Icons.favorite,
+                color: Colors.red,
+                size: currentIcon,
+              )),
           Positioned(
             bottom: 10,
             right: currentPos,
@@ -117,13 +114,24 @@ class _MyHeader extends SliverPersistentHeaderDelegate {
             left: currentPosText,
             child: Column(
               children: [
-                Text('Tiêu đề',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),),
-                SizedBox(height: 5,),
-                Text('Giới thiệu chung về tiêu đề này',style: TextStyle(color: Colors.white,fontStyle: FontStyle.italic),)
+                Text(
+                  'Tiêu đề',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Giới thiệu chung về tiêu đề này',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                )
               ],
             ),
           )
-
         ],
       ),
     );
