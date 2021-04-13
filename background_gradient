@@ -28,6 +28,8 @@ class _AnimatedGradientState extends State<AnimatedGradient> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    /// tự động chạy hoạt ảnh
     Future.delayed(const Duration(milliseconds: 10), () {
       setState(() {
         bottomColor = Colors.blue;
@@ -39,36 +41,38 @@ class _AnimatedGradientState extends State<AnimatedGradient> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-          children: [
-            AnimatedContainer(
-              duration: Duration(seconds: 2),
-              onEnd: () {
-                setState(() {
-                  index = index + 1;
-                  // animate the color
-                  bottomColor = colorList[index % colorList.length];
-                  topColor = colorList[(index + 1) % colorList.length];
+      children: [
+        AnimatedContainer(
+          duration: Duration(seconds: 2),
+          onEnd: () {
+            setState(() {
+              index = index + 1;
+              // animate the color
+              bottomColor = colorList[index % colorList.length];
+              topColor = colorList[(index + 1) % colorList.length];
 
-                  //// animate the alignment
-                  // begin = alignmentList[index % alignmentList.length];
-                  // end = alignmentList[(index + 2) % alignmentList.length];
-                });
-              },
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: begin, end: end, colors: [bottomColor, topColor])),
-            ),
-            // Positioned.fill(
-            //   child: IconButton(
-            //     icon: Icon(Icons.play_arrow),
-            //     onPressed: () {
-            //       setState(() {
-            //         bottomColor = Colors.blue;
-            //       });
-            //     },
-            //   ),
-            // )
-          ],
-        ));
+              /// làm sinh động hơn(quay cuồng)
+              begin = alignmentList[index % alignmentList.length];
+              end = alignmentList[(index + 2) % alignmentList.length];
+            });
+          },
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: begin, end: end, colors: [bottomColor, topColor])),
+        ),
+
+        /// chạy hoạt ảnh bằng nút
+        // Positioned.fill(
+        //   child: IconButton(
+        //     icon: Icon(Icons.play_arrow),
+        //     onPressed: () {
+        //       setState(() {
+        //         bottomColor = Colors.blue;
+        //       });
+        //     },
+        //   ),
+        // )
+      ],
+    ));
   }
 }
