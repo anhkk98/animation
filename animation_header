@@ -1,0 +1,145 @@
+import 'package:flutter/material.dart';
+
+import 'bg.dart';
+
+class AnimationHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFFECECEA),
+      body: SafeArea(
+        child: CustomScrollView(
+
+          slivers: <Widget>[
+            SliverPersistentHeader(
+              delegate: _MyHeader(),
+              pinned: true,
+
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  'asdhasd áds ashdaushdaiuwh dahdfiefh weweuf ehf wh wej hiu hiu h uih uih iuy gui h ioj oihi u i iu h uh oijioj oi io hio h oh oi h oih io hi  hi io  i nj n  oijoihm ig yg i  ig,7g,i g,igm i,ugi u ,ig i ,iy gi uhi , iui yg  iyng iyg yujh bjhnb gngv nhgv hg v jhihukh iuh ,iu hiu h,uihiu hiuhm iuh,iuhi uhiulkhiu iuhimh iuhiuhmi huihuiuh iuhmiuhihu ihuihuiuh iuhihiuhi uhmiuhmiuhiuh miuhmiuhmiuh mihuiuhi huiuhniug in g milm j,lio ịu guftd asdhasd áds ashdaushdaiuwh dahdfiefh weweuf ehf wh wej hiu hiu h uih uih iuy gui h ioj oihi u i iu h uh oijioj oi io hio h oh oi h oih io hi  hi io  i nj n  oijoihm ig yg i  ig,7g,i g,igm i,ugi u ,ig i ,iy gi uhi , iui yg  iyng iyg yujh bjhnb gngv nhgv hg v jhihukh iuh ,iu hiu h,uihiu hiuhm iuh,iuhi uhiulkhiu iuhimh iuhiuhmi huihuiuh iuhmiuhihu ihuihuiuh iuhihiuhi uhmiuhmiuhiuh miuhmiuhmiuh mihuiuhi huiuhniug in g milm j,lio ịu guftdasdhasd áds ashdaushdaiuwh dahdfiefh weweuf ehf wh wej hiu hiu h uih uih iuy gui h ioj oihi u i iu h uh oijioj oi io hio h oh oi h oih io hi  hi io  i nj n  oijoihm ig yg i  ig,7g,i g,igm i,ugi u ,ig i ,iy gi uhi , iui yg  iyng iyg yujh bjhnb gngv nhgv hg v jhihukh iuh ,iu hiu h,uihiu hiuhm iuh,iuhi uhiulkhiu iuhimh iuhiuhmi huihuiuh iuhmiuhihu ihuihuiuh iuhihiuhi uhmiuhmiuhiuh miuhmiuhmiuh mihuiuhi huiuhniug in g milm j,lio ịu guftdasdhasd áds ashdaushdaiuwh dahdfiefh weweuf ehf wh wej hiu hiu h uih uih iuy gui h ioj oihi u i iu h uh oijioj oi io hio h oh oi h oih io hi  hi io  i nj n  oijoihm ig yg i  ig,7g,i g,igm i,ugi u ,ig i ,iy gi uhi , iui yg  iyng iyg yujh bjhnb gngv nhgv hg v jhihukh iuh ,iu hiu h,uihiu hiuhm iuh,iuhi uhiulkhiu iuhimh iuhiuhmi huihuiuh iuhmiuhihu ihuihuiuh iuhihiuhi uhmiuhmiuhiuh miuhmiuhmiuh mihuiuhi huiuhniug in g milm j,lio ịu guftdasdhasd áds ashdaushdaiuwh dahdfiefh weweuf ehf wh wej hiu hiu h uih uih iuy gui h ioj oihi u i iu h uh oijioj oi io hio h oh oi h oih io hi  hi io  i nj n  oijoihm ig yg i  ig,7g,i g,igm i,ugi u ,ig i ,iy gi uhi , iui yg  iyng iyg yujh bjhnb gngv nhgv hg v jhihukh iuh ,iu hiu h,uihiu hiuhm iuh,iuhi uhiulkhiu iuhimh iuhiuhmi huihuiuh iuhmiuhihu ihuihuiuh iuhihiuhi uhmiuhmiuhiuh miuhmiuhmiuh mihuiuhi huiuhniug in g milm j,lio ịu guftd',
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// độ rộng của header
+const _maxHeightHeader = 220.0;
+const _minHeightHeader = 80.0;
+
+/// độ rông của button
+/// bao gồm max và min
+const _maxWidthButton = 200.0;
+const _minWidthButton = 150.0;
+const _maxHeightButton = 120.0;
+const _minHeightButton = 60.0;
+
+/// positioned vị trí của button
+const _posButton = 4.9;
+
+/// size icon
+const _maxSizeIcon = 40.0;
+const _minSizeIcon = 0.0;
+
+/// position text
+const _maxPosText = 86.0;
+const _minPosText = 5.0;
+
+class _MyHeader extends SliverPersistentHeaderDelegate {
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+
+    /// thu nhỏ header percent = 1.0, phóng to header perent = 0.0
+    double percent = shrinkOffset / _maxHeightHeader;
+    print(percent);
+    final currentSizeWidth = (_maxWidthButton * (1 - percent))
+        .clamp(_minWidthButton, _maxWidthButton);
+    final currentSizeHeight = (_maxHeightButton * (1 - percent))
+        .clamp(_minHeightButton, _maxHeightButton);
+
+
+    /// tính position của button từ trái qua phải
+    final currentPos = _posButton / (percent + 0.033);
+
+    /// tính position của text từ max về min
+    final currentPosText = (_maxPosText * (1 - percent))
+        .clamp(_minPosText, _maxPosText);
+
+    ///
+    final currentIcon = (_maxSizeIcon * (1 - percent))
+        .clamp(_minSizeIcon, _maxSizeIcon);
+    return Container(
+      alignment: Alignment.center,
+      color: Colors.black,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+              bottom: 10,
+              right: 30,
+              child: Icon(Icons.favorite,color: Colors.red,size: currentIcon,)
+          ),
+          Positioned(
+            bottom: 10,
+            right: currentPos,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                alignment: Alignment.center,
+                width: currentSizeWidth,
+                height: currentSizeHeight,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    AnimatedGradient(),
+                    Text(
+                      'Đây là button A',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            left: currentPosText,
+            child: Column(
+              children: [
+                Text('Tiêu đề',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),),
+                SizedBox(height: 5,),
+                Text('Giới thiệu chung về tiêu đề này',style: TextStyle(color: Colors.white,fontStyle: FontStyle.italic),)
+              ],
+            ),
+          )
+
+        ],
+      ),
+    );
+  }
+
+  /// mở rộng tối đa bao nhiêu
+  @override
+  // TODO: implement maxExtent
+  double get maxExtent => _maxHeightHeader;
+
+  /// tối thiểu
+  @override
+  // TODO: implement minExtent
+  double get minExtent => _minHeightHeader;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
+}
